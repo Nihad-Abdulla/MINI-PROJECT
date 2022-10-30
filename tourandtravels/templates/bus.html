@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method>
+    
+  <div class="form-group">
+    <label for="exampleInputEmail1"></label>
+   <center> <input type="text" class="form-control" name="w" id="Search" placeholder="Search">
+    <center> <input type="text" class="form-control" name="x" id="Search" placeholder="Search">
+    <center> <input type="text" class="form-control" name="q" id="Search" placeholder="Search">
+      
+      
+    </select>
+   
+  </div>
+    
+   <center><button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  {% for bus in buses %}
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ Vehicle.images.url }}" class="img-fluid rounded-start" alt="images">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{bus.busname}}</h5>
+          <p class="card-text">{{bus.date}}</p>
+          <p class="card-text">{{bus.source}}</p>
+          <p class="card-text">{{bus.startingtime}}</p>
+          <p class="card-text">{{bus.bustype}}</p>
+          <p class="card-text">{{bus.count}}</p>
+          <p class="card-text">{{bus.price}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="{% url 'bus_individuals'  bus.id %}" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+          
+  {% endfor %}
+  {% endblock %}
+ 

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<center><!--<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ individuals.image.url }}" class="img-fluid rounded-start" alt="images">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{individuals.packagename}}</h5>
+          <p class="card-text">{{individuals.packaetype}}</p>
+          <p class="card-text">{{individuals.packagedetails}}</p>
+          <p class="card-text">{{individuals.rate}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="#" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ individuals.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{individuals.packagename}}</h5>
+      <p class="card-text">{{individuals.packaetype}}</p>
+      <p class="card-text">{{individuals.packagedetails}}</p>
+      <p class="card-text">{{individuals.rate}}</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <a href="#" class="btn btn-primary">Details</a>
+    </div>
+  </div>
+  {% endblock %}

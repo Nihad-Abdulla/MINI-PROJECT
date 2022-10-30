@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method>
+    
+    <div class="form-group">
+      <label for="exampleInputEmail1"></label>
+     <center> <input type="text" class="form-control" name="w" id="Search" placeholder="Search">
+      <center> <select name="q">
+        <option selected disabled="true">select option</option>
+        <option>Family</option>
+        <option>Group</option>
+        <option>Honeymoon</option>
+        
+      </select>
+     
+    </div>
+   
+    
+   <center><button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  {% for result in new_package %}
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ Hotel.images.url }}" class="img-fluid rounded-start" alt="images">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{result.packagename}}</h5>
+          <p class="card-text">{{result.packagetype}}</p>
+          <p class="card-text">{{result.startingdate}}</p>
+          <p class="card-text">{{result.rate}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="{% url 'package_individuals' result.id %}" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% endblock %}
+    
+ 
