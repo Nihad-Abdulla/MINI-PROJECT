@@ -6,6 +6,7 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('register/',views.register,name='register'),
     path('login/',views.login,name='login'),
+    path('logout/',views.logout,name='logout'),
     path('home/',views.home,name='home'),
     path('hotels/',views.hotels,name='hotels'),
     path('hotels/<int:pk>',views.hotels_individual,name='hotels_individual'),
@@ -14,8 +15,8 @@ urlpatterns = [
     path('packagesearch/',views.search_package,name='search_package'),
     path('packagesearch/<int:pk>',views.package_individuals,name='package_individuals'),
     path('bus/<int:pk>/busbooking/',views.busbooking,name='busbooking'),
-    path('packagebooking/',views.packagebooking,name='packagebooking'),
-    path('hotelbooking/',views.hotelbooking,name='hotelbooking'),
-
-
+    #path('bus/<int:pk>/busbooking/<int:PNR_Number>/payments',views.Bus_payment,name='payments'),
+    path('packagesearch/<int:pk>/packagebooking/',views.packagebooking,name='packagebooking'),
+    path('hotels/<int:pk>/hotelbooking/',views.hotelbooking,name='hotelbooking'),
+    # path('packagesearch/<int:pk>/packagebooking/Package_payment',views.Bus_payment,name='Package_payment'),
 ]

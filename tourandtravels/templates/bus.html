@@ -1,26 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<style> 
+  input[type=text] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  input[type=date] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  </style>
 <form method>
     
   <div class="form-group">
     <label for="exampleInputEmail1"></label>
-   <center> <input type="text" class="form-control" name="w" id="Search" placeholder="Search">
-    <center> <input type="text" class="form-control" name="x" id="Search" placeholder="Search">
-    <center> <input type="text" class="form-control" name="q" id="Search" placeholder="Search">
+   <center> <input type="text" class="form-control" name="w" id="Search" placeholder="Leaving From:">
+    <center> <input type="text" class="form-control" name="x" id="Search" placeholder="Going To">
+    <center> <input type="date" class="form-control" name="q" id="Search" placeholder="Date Of Departure:">
       
       
     </select>
    
   </div>
     
-   <center><button type="submit" class="btn btn-primary">Submit</button>
+   <center><button type="submit" class="btn btn-primary">    Search For Bus        </button>
   </form>
   
   {% for bus in buses %}
-  <div class="card mb-3" style="max-width: 540px;">
+ <!-- <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{ Vehicle.images.url }}" class="img-fluid rounded-start" alt="images">
+        <img src="{{ bus.images.url }}" class="img-fluid rounded-start" alt="images">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -36,8 +63,24 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
           
+
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ bus.images.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{bus.busname}}</h5>
+      <p class="card-text">{{bus.date}}</p>
+      <p class="card-text">{{bus.source}}</p>
+      <p class="card-text">{{bus.startingtime}}</p>
+      <p class="card-text">{{bus.bustype}}</p>
+      <p class="card-text">{{bus.price}}</p>
+
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <a href="{% url 'bus_individuals'  bus.id %}" class="btn btn-primary">Details</a>
+    </div>
+  </div>
   {% endfor %}
   {% endblock %}
  

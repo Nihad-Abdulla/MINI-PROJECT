@@ -28,7 +28,7 @@
       <p class="card-text">{{individuals.packagedetails}}</p>
       <p class="card-text">{{individuals.rate}}</p>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <a href="#" class="btn btn-primary">Details</a>
+      <a href="{% url 'packagebooking' individuals.id %}" class="btn btn-primary">Details</a>
     </div>
   </div>
   {% endblock %}

@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form HTML Template</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css2/bootstrap.min.css' %}" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'css2/style.css' %}" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+
+    
+</head>
+
+<body>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7 col-md-push-5">
+						<div class="booking-cta">
+							<h1>Make your reservation</h1>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam consectetur molestias itaque
+								ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates aliquid consequuntur cumque quasi.
+								Perspiciatis.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-pull-7">
+						<div class="booking-form">
+							<form method="POST">
+                                {% csrf_token %}
+								<div class="form-group">
+									<span class="form-label">Card Holder Name</span>
+									<input class="form-control" name="names" type="text" placeholder="Enter Your Name">
+								</div>
+                                <div class="form-group">
+									<span class="form-label">Card Number</span>
+									<input class="form-control" name="cardnumber" type="text" placeholder="Enter Your Mobile Number">
+								</div>
+                                 <!--<div class="form-group">
+									<span class="form-label">Valid Thru</span>
+									<input class="form-control" name="email" type="email" placeholder="Enter Your Email ">
+								</div>-->
+                                <!--<div class="form-group">
+									<span class="form-label">Adhar Number</span>
+									<input class="form-control" name="adhar" type="text" placeholder="Enter Your Adhar Number">
+								</div>-->
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Year</span>
+											<select class="form-control" name="year">
+												<option>2021</option>
+												<option>2022</option>
+												<option>2023</option>
+                                                <option>2024</option>
+												<option>2025</option>
+												<option>2026</option>
+                                                <option>2027</option>
+												<option>2028</option>
+												<option>2029</option>
+                                                <option>2030</option>
+												<option>2031</option>
+												<option>2032</option>
+                        
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Month</span>
+											<select class="form-control" name="month">
+												<option>01 (January)</option>
+												<option>02 (February)</option>
+												<option>03 (March)</option>
+                                                <option>04 (April)</option>
+												<option>05 (May)</option>
+												<option>06 (June)</option>
+                                                <option>07 (July)</option>
+												<option>08 (August)</option>
+												<option>09 (September)</option>
+                                                <option>10 (Ocrober)</option>
+												<option>11 (November)</option>
+												<option>12 (December)</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">CVV</span>
+											<input class="form-control" name="cvv" type="number" placeholder="Enter CVV">
+										</div>
+									</div>
+								</div>
+								<div class="form-btn">
+									<button class="submit-btn">Pay Now</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
