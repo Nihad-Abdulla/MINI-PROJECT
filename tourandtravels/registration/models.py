@@ -74,6 +74,7 @@ class Vehicle_booking(models.Model):
     numberof_seats=models.IntegerField(null=True)
     adhar_number=models.CharField(max_length=200,null=True)
     total_rate=models.IntegerField(null=True)
+    current_user=models.ForeignKey(Login,on_delete=models.CASCADE,null=True)
 
 class Package_booking(models.Model):
     PNR_P_id=models.IntegerField(null=True)
@@ -104,13 +105,14 @@ class Hotel_booking(models.Model):
 
 
 class Payment_Bus(models.Model):
-    Vehicle_id=models.ForeignKey(Vehicle,on_delete=models.CASCADE)
+    #Vehicle_id=models.ForeignKey(Vehicle,on_delete=models.CASCADE)
     Busbooking_id=models.ForeignKey(Vehicle_booking,on_delete=models.CASCADE)
     Card_holdername=models.CharField(max_length=20)
     Card_number=models.IntegerField(null=True)
     Valid_year=models.IntegerField(null=True)
     Valid_month=models.CharField(max_length=20)
-    Total_amount=models.ImageField(null=True)
+    CVV=models.IntegerField(null=True)
+    Total_amount=models.IntegerField(null=True)
 
 class Payment_Package(models.Model):
     #Package_id=models.ForeignKey(package,on_delete=models.CASCADE)

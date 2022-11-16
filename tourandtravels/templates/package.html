@@ -28,6 +28,86 @@
     padding: 12px 20px 12px 40px;
         
       }
+
+      #product1{
+    text-align:center;
+}
+
+#product1 .pro-container{
+    display:flex; 
+    padding:20px;
+    flex-wrap:wrap;
+}
+
+#product1 .pro{
+    width:23%;
+    min-width:250px;
+    padding:10px 12px;
+    border:1px solid #cce7d0;
+    border-radius:25px;
+    cursor:pointer;
+    margin:15px 0;
+    transition:0.2s ease;
+    position:relative;
+}
+
+#product1 .pro a{
+    text-decoration:none;
+}
+
+#product1 .pro:hover{
+    box-shadow:20px 20px 30px rgba(0,0,0.03,0.08);  
+}
+
+#product1 .pro img{
+    width:100%;
+    border-radius:20px;
+}
+
+#product1 .pro .des{
+    text-align:start;
+    padding:10px 0;
+}
+
+#product1 .pro .des span{
+    color:#606063;
+    font-size:20px;
+}
+
+#product1 h2{
+    color:#8490B8;
+}
+
+#product1 p{
+    font-size:18px;
+}
+
+#product1 .pro .des h5{
+    padding-top:7px;
+    color:#1a1a1a;
+    font-size:14px;
+}
+
+#product1 .pro .des h4{
+    padding-top:7px;
+    font-size:15px;
+    font-weight:700;
+    color:#E69500;
+}
+
+#product1 .pro .cart{
+    width:40px;
+    height:40px;
+    line-height:40px;
+    border-radius:50px;
+    background-color:#e8f6ea;
+    color:#088178;
+    border:1px solid #cce7d0;
+    position:absolute;
+    bottom:20px;
+    right:10px;
+}
+
   </style>
 
 
@@ -50,7 +130,7 @@
    <center><button type="submit" class="btn btn-primary">Search For Packages</button>
   </form>
   
-  {% for result in new_package %}
+  <!-- {% for result in new_package %} -->
   <!--<div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
       <div class="col-md-4">
@@ -71,7 +151,7 @@
 
 
 
-  <div class="card" style="width: 18rem;">
+  <!-- <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="{{ result.image.url }}" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{result.packagename}}</h5>
@@ -82,7 +162,28 @@
       <a href="{% url 'package_individuals' result.id %}" class="btn btn-primary">Details</a>
     </div>
   </div>
-  {% endfor %}
+  {% endfor %} -->
+  <section id="product1">
+    <h2>New Trendings</h2>
+    <p>Summer Collection New Model Design</p>
+    <div class="pro-container">
+      {% for result in new_package %}
+        <div class="pro">
+            <a href="{% url 'package_individuals' result.id %}">
+              <img src="{{ result.image.url }}" alt="">
+            <div class="des">
+                <span>{{result.packagename}}</span>
+                <h5>{{result.packaetype}}</h5>
+                <h4>{{result.packagedetails}}</h4>
+                <!-- <h4>{{bus.startingtime}}</h4>
+                <h4>{{bus.bustype}}</h4> -->
+                <h4>₹{{result.rate}}</h4>
+            </div>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
   {% endblock %}
     

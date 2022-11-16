@@ -4,7 +4,8 @@ from django.shortcuts import render,redirect
 #from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib import messages
-from datetime import date
+from datetime import datetime
+from datetime import datetime
 from django.db.models import Max
 
 #from tourandtravels.registration.admin import hoteladmin
@@ -127,15 +128,16 @@ def busbooking(request,pk):
         total_amt = int(seatno) * int(seat_price)
         buses = Vehicle.objects.get(id=current_bus_id)
         buses.available_seats = int(buses.available_seats) - int(seatno)
+        print(request.user)
 
         if int(buses.available_seats) >= int(seatno):
            
             Vehicle_booking(Bus_id=vehicles.get(id=current_bus_id),PNR_id=PNR_Number,Passenger_name=name,Passenger_mobile=phone,Passenger_email=email,numberof_seats=seatno,adhar_number=adhar_number,total_rate=total_amt).save()
             buses.save()
-            #current_booking_id = Vehicle_booking.objects.latest('id').id
-            #print(current_booking_id,)
-            #return redirect('payments')
-            # return render(request,'payments.html')
+            current_booking_id = Vehicle_booking.objects.latest('PNR_id').PNR_id
+            #print(PNR_Number)
+            return redirect('payments',current_bus_id,current_booking_id)
+            #return render(request,'pyments.html',PNR_Number)
             
         else:
              messages.success(request,"No seats available")
@@ -146,27 +148,31 @@ def busbooking(request,pk):
     }
     return render(request,'busbooking.html',context)
 
-def Bus_payment(request,pk):
+def Bus_payment(request,pk,PNR_id):
 
     vehicle_p1= Vehicle_booking.objects.all()
 
     current_bus_bookingid = id
-    print(current_bus_bookingid)
-    current_busid =   Vehicle_booking.objects.get(id=pk).Bus_id_id 
-    current_busprice =  Vehicle_booking.objects.get(id=pk).total_rate
+    # print(current_bus_bookingid)
+    current_PNR_id = PNR_id
+    # print(current_PNR_id)
+    #current_busid =   Vehicle_booking.objects.get(PNR_id=PNR_id).Bus_id_id 
+    current_busprice =  Vehicle_booking.objects.get(PNR_id=PNR_id).total_rate
     if request.method == 'POST':
         Holder_name = request.POST.get('names')
         Card_number = request.POST.get('cardnumber')
+
         Year_valid = request.POST.get('year')
         Month_valid = request.POST.get('month')
         card_cvv = request.POST.get('cvv')
+        print(card_cvv)
 
         
-        Payment_Bus(Busbooking_id=vehicle_p1.get(id=current_bus_bookingid), Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount= current_busprice).save()
+        Payment_Bus(Busbooking_id=vehicle_p1.get(PNR_id=current_PNR_id), Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_busprice).save()
 
 
 
-    return render(request,'payments.html')
+    return render(request,'pyments.html')
     
 def packagebooking(request,pk):
     Packagess = package.objects.all()
@@ -184,18 +190,25 @@ def packagebooking(request,pk):
         number_adult = request.POST.get('adults')
         number_children = request.POST.get('childrens')
         packages_s = package.objects.get(id=current_package_id)
-        packages_s.available_package = int(packages_s.available_package) - 1
+        packages_s.available_package = int(packages_s.available_package) - int(1)
+        #new_avilable_package = package.objects.get(id=current_package_id).available_package
+        #new_avilable_package_count = int(new_avilable_package) - int(1)
       
 
        
     
-        if int(packages_s.available_package) <= int(available_package_count) & int(packages_s.available_package) > 0:
+        if int(packages_s.available_package) > 0:
+        #if int(new_avilable_package_count) <= int(available_package_count) & int(new_avilable_package_count) > 0:
             Package_booking(Package_id=Packagess.get(id=current_package_id),PNR_P_id=PNR_P_Number,Passenger_name=name,Passenger_mobile=mobile,Passenger_email=email,adhar_number=adhar,numberof_adult=number_adult,numberof_children=number_children,total_rate=package_price).save()
             packages_s.save()
+            #package(available_package=new_avilable_package_count)
+
+            current_booking_id_pack = Package_booking.objects.latest('PNR_P_id').PNR_P_id
             #return redirect('Package_payment')
+            return redirect('payments_pka',current_package_id,current_booking_id_pack)
             # return render(request,'pyments.html')
         else:
-             messages.success(request,"No Packages available")
+            messages.success(request,"No Packages available")
     context = {
     }
 
@@ -203,12 +216,14 @@ def packagebooking(request,pk):
     return render(request,'packagebooking.html')
 
 
-def Package_payment(request,pk):
-    Package_1=Package_booking.obkects.all()
+def Package_payment(request,pk,PNR_P_id):
+    Package_1=Package_booking.objects.all()
 
-    current_package_bookingid = Package_booking.objects.get(id=pk).id
-    current_packageid =  Package_booking.objects.get(id=pk).Package_id_id 
-    current_packageprice = Package_booking.objects.get(id=pk).total_rate
+    current_PNR_P_id = PNR_P_id
+
+    current_package_bookingid = id
+    #current_packageid =  Package_booking.objects.get(id=pk).Package_id_id 
+    current_packageprice = Package_booking.objects.get(PNR_P_id=PNR_P_id).total_rate
     if request.method == 'POST':
         Holder_name = request.POST.get('names')
         Card_number = request.POST.get('cardnumber')
@@ -217,12 +232,14 @@ def Package_payment(request,pk):
         card_cvv = request.POST.get('cvv')
 
         
-        Payment_Package(Packagebooking_id=Package_1.get(id=current_package_bookingid), Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_packageprice).save()
+        Payment_Package(Packagebooking_id=Package_1.get(PNR_P_id=current_PNR_P_id),Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_packageprice).save()
 
 
 
-    return render(request,'payments.html')
+    return render(request,'payment package.html')
 
+#def numOfDays(checkin,checkout):
+    #return (checkout-checkin).days
 
 def hotelbooking(request,pk):
     Hotelss = hotel.objects.all()
@@ -241,15 +258,22 @@ def hotelbooking(request,pk):
         rooms = request.POST.get('roomss')
         number_adult = request.POST.get('adult')
         number_children = request.POST.get('child')
+        
+        d1 = datetime.strptime(checkin, "%Y-%m-%d")
+        d2 = datetime.strptime(checkout, "%Y-%m-%d")
 
-        total_days = int(checkin) - int(checkout)
-        total_amt = int(rooms) * int(room_price) * int(total_days)
+        total_days = d2 - d1
+        tot = total_days.days
+        print(tot)
+        total_amt = int(rooms) * int(room_price)  * int(tot)
         hotel_room = hotel.objects.get(id=current_hotel_id)
         hotel_room.available_rooms = int(hotel_room.available_rooms) - int(rooms)
 
         if int(hotel_room.available_rooms) >= int(rooms):
             Hotel_booking(Hotel_id=Hotelss.get(id=current_hotel_id),PNR_H_id=PNR_H_Number,User_name=name,User_address=address,User_mobile= mobile,User_email=email,User_adhar=adhar,Check_in=checkin,Check_out=checkout,numberof_rooms=rooms,numberof_adult=number_adult,numberof_children=number_children,total_rate=total_amt).save()
             hotel_room.save()
+            current_booking_id = Hotel_booking.objects.latest('PNR_H_id').PNR_H_id
+            return redirect('payments_hot',current_hotel_id,current_booking_id)
 
         else:
             messages.success(request,"No Rooms available")
@@ -262,12 +286,13 @@ def hotelbooking(request,pk):
 
     return render(request,'hotelbooking.html')
 
-def Hotel_payment(request,pk):
-    Hotels_1=Hotel_booking.obkects.all()
+def Hotel_payment(request,pk,PNR_H_id):
+    Hotels_1=Hotel_booking.objects.all()
 
-    current_hotel_bookingid = Hotel_booking.objects.get(id=pk).id
-    current_hotelid =  Hotel_booking.objects.get(id=pk).Package_id_id 
-    current_hotelprice = Hotel_booking.objects.get(id=pk).total_rate
+    current_hotel_bookingid = id
+    current_PNR_H_id = PNR_H_id
+    #current_hotelid =  Hotel_booking.objects.get(id=pk).Package_id_id 
+    current_hotelprice = Hotel_booking.objects.get(PNR_H_id=PNR_H_id).total_rate
     if request.method == 'POST':
         Holder_name = request.POST.get('names')
         Card_number = request.POST.get('cardnumber')
@@ -276,11 +301,11 @@ def Hotel_payment(request,pk):
         card_cvv = request.POST.get('cvv')
 
         
-        Payment_Hotel( Hotelbooking_id=Hotels_1.get(id=current_hotel_bookingid), Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_hotelprice).save()
+        Payment_Hotel( Hotelbooking_id=Hotels_1.get(PNR_H_id=current_PNR_H_id),Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_hotelprice).save()
 
 
 
-    return render(request,'payments.html')
+    return render(request,'payment hotel.html')
 
 def index(request):
 

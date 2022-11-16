@@ -15,8 +15,10 @@ urlpatterns = [
     path('packagesearch/',views.search_package,name='search_package'),
     path('packagesearch/<int:pk>',views.package_individuals,name='package_individuals'),
     path('bus/<int:pk>/busbooking/',views.busbooking,name='busbooking'),
-    #path('bus/<int:pk>/busbooking/<int:PNR_Number>/payments',views.Bus_payment,name='payments'),
+    path('bus/<int:pk>/busbooking/<PNR_id>/payments',views.Bus_payment,name='payments'),
     path('packagesearch/<int:pk>/packagebooking/',views.packagebooking,name='packagebooking'),
+    path('packagesearch/<int:pk>/packagebooking/<PNR_P_id>/payments_pka',views.Package_payment,name='payments_pka'),
     path('hotels/<int:pk>/hotelbooking/',views.hotelbooking,name='hotelbooking'),
+    path('hotels/<int:pk>/hotelbooking/<PNR_H_id>/payments_hot',views.Hotel_payment,name='payments_hot')
     # path('packagesearch/<int:pk>/packagebooking/Package_payment',views.Bus_payment,name='Package_payment'),
 ]
