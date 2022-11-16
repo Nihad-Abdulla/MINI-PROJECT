@@ -30,8 +30,8 @@ class hotel(models.Model):
     rate=models.FloatField(max_length=200)
     available_rooms=models.IntegerField(null=True)
 
-    def __str__(self):
-        return self.place
+    # def __str__(self):
+    #     return self.place
 
 class package(models.Model):
     packagetype=models.CharField(max_length=200)
@@ -45,8 +45,8 @@ class package(models.Model):
     available_package=models.IntegerField(null=True)
 
     
-    def __str__(self):
-        return self.packagename
+    # def __str__(self):
+    #     return self.packagename
     
 
 class Vehicle(models.Model):
@@ -62,8 +62,8 @@ class Vehicle(models.Model):
     available_seats=models.IntegerField(null=True)
     image=models.ImageField(null=True, blank=False)
     
-    def __str__(self):
-        return self.busname
+    # def __str__(self):
+    #     return self.busname
 
 class Vehicle_booking(models.Model):
     PNR_id=models.IntegerField(null=True)

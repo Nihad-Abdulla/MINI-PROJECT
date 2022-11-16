@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<style>
+  body{
+  background-image: url('../static/image/bg_1.jpg');
+}
+  .card{
+    display:flex; 
+    padding:8px;
+    flex-wrap:wrap;
+}
+h5{
+    padding-top:7px;
+    color:#1a1a1a;
+    font-size:14px;
+}
+span{
+    color:#606063;
+    font-size:20px;
+}
+h4{
+    padding-top:7px;
+    font-size:15px;
+    font-weight:700;
+    color:#E69500;
+}
+</style>
 
 <!--<div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
@@ -23,12 +47,14 @@
   <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="{{ individuals.image.url }}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{individuals.name}}</h5>
-      <p class="card-text">{{individuals.place}}</p>
-      <p class="card-text">{{individuals.roomtype}}</p>
-      <p class="card-text">{{individuals.description}}</p>
+      <span>{{individuals.name}}</span>
+      <h5>{{individuals.place}}</h5>
+      <h4>{{individuals.roomtype}}</h4>
+      <h4>{{individuals.acnonac}}</h4>
+      <h4>₹{{individuals.rate}}</h4>
+      <h4>{{individuals.description}}</h4>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      <a href="{% url 'hotelbooking' individuals.id %}" class="btn btn-primary">Details</a>
+      <a href="{% url 'hotelbooking' individuals.id %}" class="btn btn-primary">BOOK</a>
     </div>
   </div>
   {% endblock %}

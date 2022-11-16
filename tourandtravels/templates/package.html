@@ -2,6 +2,9 @@
 {% block content %}
 
 <style> 
+body{
+  background-image: url('../static/image/bg_1.jpg');
+}
   input[type=text] {
     width: 50%;
     box-sizing: border-box;
@@ -49,6 +52,7 @@
     margin:15px 0;
     transition:0.2s ease;
     position:relative;
+    background-color: rgb(253, 249, 249);
 }
 
 #product1 .pro a{
@@ -164,8 +168,7 @@
   </div>
   {% endfor %} -->
   <section id="product1">
-    <h2>New Trendings</h2>
-    <p>Summer Collection New Model Design</p>
+   
     <div class="pro-container">
       {% for result in new_package %}
         <div class="pro">
@@ -174,7 +177,8 @@
             <div class="des">
                 <span>{{result.packagename}}</span>
                 <h5>{{result.packaetype}}</h5>
-                <h4>{{result.packagedetails}}</h4>
+                <h4>STARTING :{{result.startingdate}}</h4>
+                <h4>ENDING:{{result.endingdate}}</h4>
                 <!-- <h4>{{bus.startingtime}}</h4>
                 <h4>{{bus.bustype}}</h4> -->
                 <h4>₹{{result.rate}}</h4>

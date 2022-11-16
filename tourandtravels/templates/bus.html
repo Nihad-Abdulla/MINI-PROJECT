@@ -2,6 +2,9 @@
 {% block content %}
 
 <style> 
+body{
+  background-image: url('../static/image/bg_1.jpg');
+}
   input[type=text] {
     width: 50%;
     box-sizing: border-box;
@@ -47,6 +50,7 @@
     margin:15px 0;
     transition:0.2s ease;
     position:relative;
+    background-color: rgb(253, 249, 249);
 }
 
 #product1 .pro a{
@@ -112,7 +116,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1"></label>
    <center> <input type="text" class="form-control" name="w" id="Search" placeholder="Leaving From:">
-    <center> <input type="text" class="form-control" name="x" id="Search" placeholder="Going To">
+    <center> <input type="text" class="form-control" name="x" id="Search" placeholder="Going To:">
     <center> <input type="date" class="form-control" name="q" id="Search" placeholder="Date Of Departure:">
       
       
@@ -164,8 +168,6 @@
   {% endfor %} -->
 
   <section id="product1">
-    <h2>New Trendings</h2>
-    <p>Summer Collection New Model Design</p>
     <div class="pro-container">
       {% for bus in buses %}
         <div class="pro">
@@ -174,7 +176,8 @@
             <div class="des">
                 <span>{{bus.busname}}</span>
                 <h5>{{bus.date}}</h5>
-                <h4>{{bus.source}}</h4>
+                <h4>Leaving From:{{bus.source}}</h4>
+                <h4>Going To:{{bus.destination}}</h4>
                 <h4>{{bus.startingtime}}</h4>
                 <h4>{{bus.bustype}}</h4>
                 <h4>₹{{bus.price}}</h4>

@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Booking Form HTML Template</title>
+	<title>Hotel Booking</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
@@ -46,24 +46,24 @@
                                 {% csrf_token %}
 								<div style="margin-bottom: 3px">
 									<span class="form-label">Name</span>
-									<input class="form-control" name="names" type="text" placeholder="Enter a destination or hotel name">
+									<input class="form-control" name="names" type="text" placeholder="Enter a destination or hotel name" required >
 								</div>
 								<div style="margin-bottom: 3px">
 									<span class="form-label">Address</span>
-									<input class="form-control" name="address" type="text" placeholder="Enter a destination or hotel name">
+									<input class="form-control" name="address" type="text" placeholder="Enter a destination or hotel name" required >
 								</div>
 								
 								<div style="margin-bottom: 3px">
 									<span class="form-label">Email</span>
-									<input class="form-control" name="email" type="text" placeholder="Enter a destination or hotel name">
+									<input class="form-control" name="email" type="text" placeholder="Enter a destination or hotel name" required >
 								</div>
 								<div style="margin-bottom: 3px">
 									<span class="form-label">Mobile Number</span>
-									<input class="form-control" name="phone" type="text" placeholder="Enter a destination or hotel name">
+									<input class="form-control" name="phone" type="text" placeholder="Enter a destination or hotel name" required >
 								</div>
 								<div style="margin-bottom: 3px">
 									<span class="form-label">Adhar Number</span>
-									<input class="form-control" name="adhar" type="text" placeholder="Enter a destination or hotel name">
+									<input class="form-control" name="adhar" type="text" placeholder="Enter a destination or hotel name" required >
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
@@ -83,7 +83,7 @@
 									<div class="col-sm-4">
 										<div style="margin-bottom: 3px">
 											<span class="form-label">Rooms</span>
-											<select class="form-control" name="roomss">
+											<select class="form-control" name="roomss" required >
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
@@ -94,10 +94,22 @@
 									<div class="col-sm-4">
 										<div style="margin-bottom: 3px">
 											<span class="form-label">Adults</span>
-											<select class="form-control" name="adult">
+											<select class="form-control" name="adult" required >
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+												<option>10</option>
+												<option>11</option>
+												<option>12</option>
+												<option>13</option>
+												<option>14</option>
+												<option>15</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>
@@ -105,10 +117,22 @@
 									<div class="col-sm-4">
 										<div style="margin-bottom: 3px">
 											<span class="form-label">Children</span>
-											<select class="form-control" name="child">
-												<option>0</option>
+											<select class="form-control" name="child" required >
 												<option>1</option>
 												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+												<option>10</option>
+												<option>11</option>
+												<option>12</option>
+												<option>13</option>
+												<option>14</option>
+												<option>15</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>

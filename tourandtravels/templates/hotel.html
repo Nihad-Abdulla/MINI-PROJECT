@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <style> 
+body{
+  background-image: url('../static/image/bg_1.jpg');
+}
   input[type=text] {
     width: 50%;
     box-sizing: border-box;
@@ -38,6 +41,7 @@
     margin:15px 0;
     transition:0.2s ease;
     position:relative;
+    background-color: rgb(253, 249, 249);
 }
 
 #product1 .pro a{
@@ -54,7 +58,7 @@
 }
 
 #product1 .pro .des{
-    text-align:start;
+    text-align:center;
     padding:10px 0;
 }
 
@@ -151,8 +155,7 @@
 
 
   <section id="product1">
-    <h2>New Trendings</h2>
-    <p>Summer Collection New Model Design</p>
+    
     <div class="pro-container">
       {% for Hotel in Hotel %}
         <div class="pro">
