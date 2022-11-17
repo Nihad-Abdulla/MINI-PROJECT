@@ -1,7 +1,7 @@
 from ast import Div
 from django.contrib import admin
 from .models import Vehicle_booking, hotel,Vehicle,package, new_user,Package_booking,Payment_Bus,Payment_Package
-from .models import Hotel_booking,Payment_Hotel,Login
+from .models import Hotel_booking,Payment_Hotel,Login,cancelations
 
 
 
@@ -17,3 +17,4 @@ admin.site.register(Hotel_booking),
 admin.site.register(Payment_Bus),
 admin.site.register(Payment_Package),
 admin.site.register(Payment_Hotel),
+admin.site.register(cancelations),

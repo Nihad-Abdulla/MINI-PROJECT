@@ -1,6 +1,7 @@
 from email.mime import image
 from unicodedata import name
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class new_user(models.Model):
@@ -74,7 +75,7 @@ class Vehicle_booking(models.Model):
     numberof_seats=models.IntegerField(null=True)
     adhar_number=models.CharField(max_length=200,null=True)
     total_rate=models.IntegerField(null=True)
-    current_user=models.ForeignKey(Login,on_delete=models.CASCADE,null=True)
+    current_user=models.CharField(max_length=200,null=True)
 
 class Package_booking(models.Model):
     PNR_P_id=models.IntegerField(null=True)
@@ -86,6 +87,7 @@ class Package_booking(models.Model):
     numberof_adult=models.IntegerField(null=True)
     numberof_children=models.IntegerField(null=True)
     total_rate=models.IntegerField(null=True)
+    current_user=models.CharField(max_length=200,null=True)
 
 class Hotel_booking(models.Model):
     PNR_H_id=models.IntegerField(null=True)
@@ -101,6 +103,7 @@ class Hotel_booking(models.Model):
     numberof_adult=models.IntegerField(null=True)
     numberof_children=models.IntegerField(null=True)
     total_rate=models.IntegerField(null=True)
+    current_user=models.CharField(max_length=200,null=True)
 
 
 
@@ -134,6 +137,12 @@ class Payment_Hotel(models.Model):
     CVV=models.IntegerField(null=True)
     Total_amount=models.IntegerField(null=True)
 
+class cancelations(models.Model):
+    PNR_NUMBERS=models.IntegerField(null=True)
+    BOOKING_NUMBER=models.IntegerField(null=True)
+    Current_user_man=models.CharField(max_length=200,null=True)
+    email=models.CharField(max_length=200,null=True)
+    Mobile_number=models.IntegerField(null=True)
 
     
 

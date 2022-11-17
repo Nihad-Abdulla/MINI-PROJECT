@@ -12,7 +12,7 @@ from django.db.models import Max
 from .models import  new_user
 from hashlib import sha256
 from .models import hotel,Vehicle,package,Vehicle_booking, Package_booking,Hotel_booking, Payment_Package
-from .models import Payment_Bus,Payment_Hotel
+from .models import Payment_Bus,Payment_Hotel,Login,cancelations
 
 
 # Create your views here.
@@ -36,6 +36,7 @@ def login(request):
         Password1=sha256(password.encode()).hexdigest()
         user=new_user.objects.filter(username=username,password=password)
         if user:
+            Login(username=username, password=password).save()
             return redirect('home')
         else:
             return redirect('login')
@@ -128,14 +129,17 @@ def busbooking(request,pk):
         total_amt = int(seatno) * int(seat_price)
         buses = Vehicle.objects.get(id=current_bus_id)
         buses.available_seats = int(buses.available_seats) - int(seatno)
-        print(request.user)
-
+        # current_blogin = Login.objects.latest('id').PNR_id
+        # print(request.user)
+        current_users = Login.objects.latest('username').username
+        # print(current_users)
         if int(buses.available_seats) >= int(seatno):
            
-            Vehicle_booking(Bus_id=vehicles.get(id=current_bus_id),PNR_id=PNR_Number,Passenger_name=name,Passenger_mobile=phone,Passenger_email=email,numberof_seats=seatno,adhar_number=adhar_number,total_rate=total_amt).save()
+            Vehicle_booking(Bus_id=vehicles.get(id=current_bus_id),PNR_id=PNR_Number,Passenger_name=name,Passenger_mobile=phone,Passenger_email=email,numberof_seats=seatno,adhar_number=adhar_number,total_rate=total_amt,current_user=current_users).save()
             buses.save()
             current_booking_id = Vehicle_booking.objects.latest('PNR_id').PNR_id
-            #print(PNR_Number)
+            
+            
             return redirect('payments',current_bus_id,current_booking_id)
             #return render(request,'pyments.html',PNR_Number)
             
@@ -169,7 +173,8 @@ def Bus_payment(request,pk,PNR_id):
 
         
         Payment_Bus(Busbooking_id=vehicle_p1.get(PNR_id=current_PNR_id), Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_busprice).save()
-
+        messages.success(request,"BOOKING DONE SUCCESSFULLY")
+        return redirect('home')
 
 
     return render(request,'pyments.html')
@@ -193,13 +198,13 @@ def packagebooking(request,pk):
         packages_s.available_package = int(packages_s.available_package) - int(1)
         #new_avilable_package = package.objects.get(id=current_package_id).available_package
         #new_avilable_package_count = int(new_avilable_package) - int(1)
-      
+        current_users = Login.objects.latest('username').username
 
        
     
         if int(packages_s.available_package) > 0:
         #if int(new_avilable_package_count) <= int(available_package_count) & int(new_avilable_package_count) > 0:
-            Package_booking(Package_id=Packagess.get(id=current_package_id),PNR_P_id=PNR_P_Number,Passenger_name=name,Passenger_mobile=mobile,Passenger_email=email,adhar_number=adhar,numberof_adult=number_adult,numberof_children=number_children,total_rate=package_price).save()
+            Package_booking(Package_id=Packagess.get(id=current_package_id),PNR_P_id=PNR_P_Number,Passenger_name=name,Passenger_mobile=mobile,Passenger_email=email,adhar_number=adhar,numberof_adult=number_adult,numberof_children=number_children,total_rate=package_price,current_user=current_users).save()
             packages_s.save()
             #package(available_package=new_avilable_package_count)
 
@@ -233,7 +238,9 @@ def Package_payment(request,pk,PNR_P_id):
 
         
         Payment_Package(Packagebooking_id=Package_1.get(PNR_P_id=current_PNR_P_id),Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_packageprice).save()
-
+        messages.success(request,"BOOKING DONE SUCCESSFULLY")
+        return redirect('home')
+        
 
 
     return render(request,'payment package.html')
@@ -268,9 +275,10 @@ def hotelbooking(request,pk):
         total_amt = int(rooms) * int(room_price)  * int(tot)
         hotel_room = hotel.objects.get(id=current_hotel_id)
         hotel_room.available_rooms = int(hotel_room.available_rooms) - int(rooms)
+        current_users = Login.objects.latest('username').username
 
         if int(hotel_room.available_rooms) >= int(rooms):
-            Hotel_booking(Hotel_id=Hotelss.get(id=current_hotel_id),PNR_H_id=PNR_H_Number,User_name=name,User_address=address,User_mobile= mobile,User_email=email,User_adhar=adhar,Check_in=checkin,Check_out=checkout,numberof_rooms=rooms,numberof_adult=number_adult,numberof_children=number_children,total_rate=total_amt).save()
+            Hotel_booking(Hotel_id=Hotelss.get(id=current_hotel_id),PNR_H_id=PNR_H_Number,User_name=name,User_address=address,User_mobile= mobile,User_email=email,User_adhar=adhar,Check_in=checkin,Check_out=checkout,numberof_rooms=rooms,numberof_adult=number_adult,numberof_children=number_children,total_rate=total_amt,current_user=current_users).save()
             hotel_room.save()
             current_booking_id = Hotel_booking.objects.latest('PNR_H_id').PNR_H_id
             return redirect('payments_hot',current_hotel_id,current_booking_id)
@@ -302,6 +310,8 @@ def Hotel_payment(request,pk,PNR_H_id):
 
         
         Payment_Hotel( Hotelbooking_id=Hotels_1.get(PNR_H_id=current_PNR_H_id),Card_holdername= Holder_name, Card_number=Card_number, Valid_year=Year_valid,Valid_month=Month_valid,CVV=card_cvv,Total_amount=current_hotelprice).save()
+        messages.success(request,"BOOKING DONE SUCCESSFULLY")
+        return redirect('home')
 
 
 
@@ -311,4 +321,33 @@ def index(request):
 
     return render(request,'index.html')
 
+# def view_booking(request):
+#     current_u = Login.objects.latest('id').id
+#     curent_user_name = Login.objects.get(id=current_u).username
+#     current_user_id = new_user.objects.get(username=curent_user_name).id
+#     print(curent_user_name)
+#     my_bookings = Vehicle_booking.objects.filter(current_user_id=current_user_id)
+#     bus_id = Vehicle_booking.objects.get(current_user_id=current_user_id).Bus_id_id
+
+#     bus_bookings = Vehicle.objects.filter(id=bus_id)
+#     print(bus_bookings)
+#     context = {
+#         'my_bookings':my_bookings,
+#         'bus_bookings' :bus_bookings
+#     }
+
+#     return render(request,'bookings.html',context)
+
+def view_booking(request):
+    current_users = Login.objects.latest('username').username
+
+    if request.method == 'POST':
+        pnrnumber=request.POST.get('firstname')
+        booking_number=request.POST.get('booking number')
+        mail_id=request.POST.get('mail id')
+        cancelations(PNR_NUMBERS=pnrnumber,BOOKING_NUMBER=booking_number,email=mail_id,Current_user_man=current_users).save()
+        return redirect('home')
+    
+    return render(request, 'bookings.html')
+    
 

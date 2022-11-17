@@ -1,16 +1,88 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<center>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{ individuals.image.url }}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{individuals.busname}}</h5>
-        <p class="card-text">{{individuals.date}}</p>
-        <p class="card-text">{{individuals.source}}</p>
-        <p class="card-text">{{individuals.destination}}</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        <a href="{% url 'busbooking' individuals.id %}" class="btn btn-primary">Details</a>
-      </div>
-    </div>
-    {% endblock %}
+<style>
+  body{
+  background-image: url('../static/image/bg_1.jpg');
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pro{
+  width: 50%;
+  
+
+}
+
+
+</style>
+<body><center>
+<div class="pro">
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" id="fname" name="firstname" placeholder="PNR NUMBER">
+
+    
+    <input type="text" id="lname" name="booking number" placeholder="BOOKING NUMBER">
+    <input type="text" id="lname" name="mail id" placeholder="MAIL ID">
+
+    <!-- <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select> -->
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+
+
+<!-- Nihad Abdulla
+<table>
+  {% for my_booking in my_bookings %}
+  <tr>
+    <th>passenger</th>
+    <td>{{ my_booking.Passenger_name }}</td>
+  </tr>
+  <tr>
+    <th>bus</th>
+    <td>{{ my_booking.Bus_id }}</td>
+  </tr>
+  {% endfor %}
+  {% for bus_book in bus_bookings %}
+  <tr>
+    <th>destination</th>
+    <td>{{ bus_book.destination }}</td>
+  </tr>
+  <tr>
+    <th>stat_time</th>
+    <td>{{ bus_book.startingtime }}</td>
+  </tr>
+  <tr>
+    <th>ending_time</th>
+    <td>{{ bus_book.endingtime }}</td>
+  </tr>
+  {% endfor %}
+</table> -->
+
+{% endblock %}

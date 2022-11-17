@@ -40,6 +40,7 @@ body{
     display:flex; 
     padding:20px;
     flex-wrap:wrap;
+    justify-content: space-between;
 }
 
 #product1 .pro{
@@ -131,7 +132,7 @@ body{
     </div>
    
     
-   <center><button type="submit" class="btn btn-primary">Search For Packages</button>
+   <center><button type="submit" class="btn btn-primary" style="background-color:#00CA4C; width: 50%;">Search For Packages</button>
   </form>
   
   <!-- {% for result in new_package %} -->
@@ -174,7 +175,7 @@ body{
         <div class="pro">
             <a href="{% url 'package_individuals' result.id %}">
               <img src="{{ result.image.url }}" alt="">
-            <div class="des">
+            <div class="des" style="text-align: center;">
                 <span>{{result.packagename}}</span>
                 <h5>{{result.packaetype}}</h5>
                 <h4>STARTING :{{result.startingdate}}</h4>

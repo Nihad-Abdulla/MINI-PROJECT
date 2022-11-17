@@ -38,6 +38,8 @@ body{
     display:flex; 
     padding:20px;
     flex-wrap:wrap;
+    justify-content: space-between;
+    
 }
 
 #product1 .pro{
@@ -51,6 +53,7 @@ body{
     transition:0.2s ease;
     position:relative;
     background-color: rgb(253, 249, 249);
+    
 }
 
 #product1 .pro a{
@@ -124,7 +127,7 @@ body{
    
   </div>
     
-   <center><button type="submit" class="btn btn-primary">    Search For Bus        </button> 
+   <center><button type="submit" class="btn btn-primary" style="background-color:#00CA4C; width: 50%;">    Search For Bus        </button> 
   </form>
   
   <!-- {% for bus in buses %} -->
@@ -173,7 +176,7 @@ body{
         <div class="pro">
             <a href="{% url 'bus_individuals' bus.id %}">
               <img src="{{ bus.image.url }}" alt="">
-            <div class="des">
+            <div class="des" style="text-align: center;">
                 <span>{{bus.busname}}</span>
                 <h5>{{bus.date}}</h5>
                 <h4>Leaving From:{{bus.source}}</h4>
