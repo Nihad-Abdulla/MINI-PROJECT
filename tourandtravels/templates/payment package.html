@@ -112,10 +112,19 @@
 											<input class="form-control" name="cvv" type="text" placeholder="Enter CVV" required >
 										</div>
 									</div>
+									<!-- {% for result in Payment_Package %}
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">CVV</span>
+											<input class="form-control" name="cvv" type="text" >{{result.Total_amount}}</input>
+										</div>
+									</div>
+									{% endfor %} -->
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn">Pay Now</button>
+									<button class="submit-btn">PAY{{current_packageprice}}NOW</button>
 								</div>
+								
 							</form>
 						</div>
 					</div>
