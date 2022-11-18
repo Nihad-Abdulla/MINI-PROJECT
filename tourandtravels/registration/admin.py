@@ -18,3 +18,5 @@ admin.site.register(Payment_Bus),
 admin.site.register(Payment_Package),
 admin.site.register(Payment_Hotel),
 admin.site.register(cancelations),
+
+admin.site.site_header = "TOUR AND TRAVELS"

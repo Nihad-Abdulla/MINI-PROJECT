@@ -345,7 +345,8 @@ def view_booking(request):
         pnrnumber=request.POST.get('firstname')
         booking_number=request.POST.get('booking number')
         mail_id=request.POST.get('mail id')
-        cancelations(PNR_NUMBERS=pnrnumber,BOOKING_NUMBER=booking_number,email=mail_id,Current_user_man=current_users).save()
+        mobile_nu=request.POST.get('mobile_number')
+        cancelations(PNR_NUMBERS=pnrnumber,BOOKING_NUMBER=booking_number,email=mail_id,Mobile_number=mobile_nu,Current_user_man=current_users).save()
         return redirect('home')
     
     return render(request, 'bookings.html')

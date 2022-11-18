@@ -37,11 +37,12 @@ input[type=submit] {
 <div class="pro">
   <form method="POST">
     {% csrf_token %}
-    <input type="text" id="fname" name="firstname" placeholder="PNR NUMBER">
+    <input type="text" id="fname" name="firstname" placeholder="PNR NUMBER" required>
 
     
-    <input type="text" id="lname" name="booking number" placeholder="BOOKING NUMBER">
-    <input type="text" id="lname" name="mail id" placeholder="MAIL ID">
+    <input type="text" id="lname" name="booking number" placeholder="BOOKING NUMBER" required>
+    <input type="text" id="lname" name="mail id" placeholder="MAIL ID" required>
+    
 
     <!-- <label for="country">Country</label>
     <select id="country" name="country">
